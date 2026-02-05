@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Jinx Fixes Everything - Redirecting</title>
+    <script type="text/javascript">
+        // Extract the path that caused the 404
+        var path = window.location.pathname;
+        
+        // Check if the path looks like a locale (e.g., /ru-ru/ or /en-us/)
+        // We look for the pattern of two letters, dash, two letters
+        var localePattern = /\/[a-z]{2}-[a-z]{2}\/?$/;
+
+        if (localePattern.test(path)) {
+            // Redirect back to the root index.html
+            // The '/' at the end ensures we go to the main menu
+            window.location.href = window.location.origin + 
+                path.substring(0, path.lastIndexOf('/', path.length - 2) + 1);
+        } else {
+            // Fallback for actual 404s
+            window.location.href = "/";
+        }
+    </script>
+</head>
+<body>
+    Redirecting to main menu...
+</body>
+</html>

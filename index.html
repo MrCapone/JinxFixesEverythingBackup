@@ -166,18 +166,20 @@
             const container = document.getElementById('game-container');
             const frame = document.getElementById('game-frame');
 
-            frame.onload = () => {
-                try {
-                    if (frame.contentWindow.location.pathname === '/') {
-                        container.style.display = 'none';
-                        menu.style.display = 'flex';
-                        frame.src = "about:blank"; // Force release WASM/WebGL memory
-                    }
+	    frame.onload = () => {
+    	        try {
+                   const currentPath = frame.contentWindow.location.pathname;
+        
+                   // If the iframe navigated to a locale path or root, close it
+                   if (supportedLocales.some(loc => currentPath.includes(loc)) || currentPath === '/') {
+                       exitGame();
+                   }
                 } catch (e) {
-                    container.style.display = 'none';
-                    menu.style.display = 'flex';
+                    // If we hit a Cross-Origin error or a 404, it usually means 
+                    // the game tried to navigate away. Treat this as an "Exit".
+                    exitGame();
                 }
-            };
+            };   
 
             const docElm = document.documentElement;
             if (docElm.requestFullscreen) {
@@ -189,6 +191,20 @@
             menu.style.display = 'none';
             container.style.display = 'block';
             frame.src = page + "?locale=" + loc;
+        }
+
+        function exitGame() {
+            const menu = document.getElementById('menu');
+            const container = document.getElementById('game-container');
+            const frame = document.getElementById('game-frame');
+    
+            container.style.display = 'none';
+            menu.style.display = 'flex';
+            frame.src = "about:blank"; // Kill the WebGL instance to free RAM
+    
+            if (document.fullscreenElement) {
+                document.exitFullscreen();
+            }
         }
     </script>
 </body>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="icon" type="image/png" href="favicon.png">    
+    <title>Jinx Fixes Everything</title>
+    <style>
+        :root {
+            --jinx-cyan: #00f2ff;
+            --jinx-pink: #ff00ea;
+            --jinx-dark: #0a0c10;
+            --jinx-border: #30363d;
+        }
+
+        body, html { 
+            margin: 0; padding: 0; width: 100%; height: 100%; 
+            background: #000; overflow: hidden; font-family: 'Segoe UI', Roboto, sans-serif; 
+        }
+
+        #menu {
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            width: 100%; height: 100%; position: absolute; z-index: 10;
+            background: linear-gradient(rgba(10, 12, 16, 0.8), rgba(10, 12, 16, 0.8)), 
+                        url('Jinx_Fixes_Everything_Promo_01.jpg') no-repeat center center;
+            background-size: cover;
+        }
+
+        .launcher { 
+            background: rgba(22, 27, 34, 0.9); 
+            padding: 40px; 
+            border-radius: 20px; 
+            border: 2px solid var(--jinx-cyan); 
+            text-align: center; 
+            width: 380px;
+            box-shadow: 0 0 30px rgba(0, 242, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        h1 { 
+            color: #fff; 
+            text-transform: uppercase; 
+            margin-bottom: 25px; 
+            letter-spacing: 2px;
+            text-shadow: 2px 2px var(--jinx-pink);
+        }
+
+        select { 
+            width: 100%; padding: 12px; margin: 10px 0; 
+            border-radius: 8px; border: 1px solid var(--jinx-border); 
+            background: #0d1117; color: #fff; font-size: 16px;
+            outline: none; transition: 0.3s;
+        }
+        select:focus { border-color: var(--jinx-pink); }
+
+        .btn { 
+            width: 100%; padding: 14px; margin: 12px 0; 
+            border-radius: 8px; border: 1px solid var(--jinx-cyan); 
+            background: transparent; color: var(--jinx-cyan); 
+            cursor: pointer; font-weight: bold; text-transform: uppercase;
+            transition: all 0.3s ease; display: block; text-decoration: none;
+            box-sizing: border-box;
+        }
+
+        .btn:hover { 
+            background: var(--jinx-cyan); 
+            color: #000; 
+            box-shadow: 0 0 20px var(--jinx-cyan);
+            transform: translateY(-2px);
+        }
+
+        .btn-alt { border-color: var(--jinx-pink); color: var(--jinx-pink); }
+        .btn-alt:hover { background: var(--jinx-pink); color: #fff; box-shadow: 0 0 20px var(--jinx-pink); }
+
+        #game-container { 
+            display: none; 
+            width: 100vw; 
+            height: 100vh; 
+            background: #000; 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            z-index: 100; 
+        }
+        iframe { 
+            width: 100%; 
+            height: 100%; 
+            border: none; 
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div id="menu">
+        <div class="launcher">
+            <img src="logo.png" alt="Jinx Logo" style="width: 80px; height: auto; margin-bottom: 10px; filter: drop-shadow(0 0 10px var(--jinx-pink));">
+            <h1>Jinx Fixes Everything</h1>
+            <select id="locale">
+                <option value="en-us">English (US)</option>
+                <option value="en-gb">English (UK)</option>
+                <option value="fr-fr">Français (France)</option>
+                <option value="de-de">Deutsch (Germany)</option>
+                <option value="it-it">Italiano (Italy)</option>
+                <option value="es-es">Español (Europe)</option>
+                <option value="pl-pl">Polski (Poland)</option>
+                <option value="cs-cz">Čeština (Czech)</option>
+                <option value="hu-hu">Magyar (Hungary)</option>
+                <option value="ro-ro">Română (Romania)</option>
+                <option value="ru-ru">Русский (Russian)</option>
+                <option value="el-gr">Ελληνικά (Greece)</option>
+                <option value="zh-cn">简体中文 (Simplified)</option>
+                <option value="zh-tw">繁體中文 (Traditional)</option>
+                <option value="ja-jp">日本語 (Japan)</option>
+                <option value="ko-kr">한국어 (Korea)</option>
+                <option value="th-th">ไทย (Thailand)</option>
+                <option value="vi-vn">Tiếng Việt (Vietnam)</option>
+                <option value="en-sg">English (Singapore)</option>
+                <option value="en-ph">English (Philippines)</option>
+                <option value="pt-br">Português (Brazil)</option>
+                <option value="es-mx">Español (Mexico)</option>
+                <option value="es-ar">Español (Argentina)</option>
+                <option value="tr-tr">Türkçe (Turkey)</option>
+                <option value="ar-ae">العربية (UAE)</option>
+            </select>
+            <div style="margin-top: 20px;">
+                <div class="btn" onclick="launch('arcade.html')">Act 1: Arcade</div>
+                <div class="btn" onclick="launch('lastdrop.html')">Act 2: Last Drop</div>
+                <div class="btn" onclick="launch('firelight.html')">Act 3: Firelight</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="game-container">
+        <iframe id="game-frame" src="" allow="fullscreen"></iframe>
+    </div>
+
+    <script>
+        const supportedLocales = [
+            'ru-ru', 'en-us', 'en-gb', 'fr-fr', 'de-de', 'it-it', 'es-es', 
+            'pl-pl', 'cs-cz', 'hu-hu', 'ro-ro', 'el-gr', 'zh-cn', 'zh-tw', 
+            'ja-jp', 'ko-kr', 'th-th', 'vi-vn', 'en-sg', 'en-ph', 'pt-br', 
+            'es-mx', 'es-ar', 'tr-tr', 'ar-ae'
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const localeSelect = document.getElementById('locale');
+            let savedLocale = localStorage.getItem('jinx_preferred_locale');
+
+            if (!savedLocale) {
+                const browserLang = navigator.language.toLowerCase();
+                savedLocale = supportedLocales.find(loc => 
+                    loc === browserLang || loc.startsWith(browserLang.split('-')[0])
+                ) || 'en-us';
+            }
+            localeSelect.value = savedLocale;
+        });
+
+        function launch(page) {
+            const localeSelect = document.getElementById('locale');
+            const loc = localeSelect.value;
+            localStorage.setItem('jinx_preferred_locale', loc);
+
+            const menu = document.getElementById('menu');
+            const container = document.getElementById('game-container');
+            const frame = document.getElementById('game-frame');
+
+            frame.onload = () => {
+                try {
+                    if (frame.contentWindow.location.pathname === '/') {
+                        container.style.display = 'none';
+                        menu.style.display = 'flex';
+                        frame.src = "about:blank"; // Force release WASM/WebGL memory
+                    }
+                } catch (e) {
+                    container.style.display = 'none';
+                    menu.style.display = 'flex';
+                }
+            };
+
+            const docElm = document.documentElement;
+            if (docElm.requestFullscreen) {
+                docElm.requestFullscreen().catch(e => {
+                    console.warn("Fullscreen request denied:", e);
+                });
+            }
+
+            menu.style.display = 'none';
+            container.style.display = 'block';
+            frame.src = page + "?locale=" + loc;
+        }
+    </script>
+</body>
+</html>

@@ -9,13 +9,10 @@
     <title>Jinx Fixes Everything</title>
     <style>
 	:root {
-            --jinx-main: #04A9EB;
-            --jinx-cyan: #00f2ff;
-	    --jinx-pink: #ff00ea;
-            --firelight: #a6ff00;
-            --jinx-dark: #0a0c10;
-            --jinx-bg: #05070a;
-            --jinx-border: #1e2329;
+            --jinx-main: #0796DA;
+            --jinx-cyan: #69D4D8;
+	    --jinx-pink: #AD40BC;
+            --firelight: #7DFE26;
         }
 
         body, html { 
@@ -56,7 +53,7 @@
 
         select {
             width: 100%; padding: 14px; margin: 10px 0;
-            border-radius: 8px; border: 1px solid var(--jinx-border);
+            border-radius: 8px; border: 1px solid var(--jinx-main);
             background: #0d1117; color: #fff; font-size: 16px;
             outline: none; transition: 0.3s;
             cursor: pointer;
@@ -75,8 +72,8 @@
 	/* Act 1: Arcade (Cyan) */
 	.btn {
             width: 100%; padding: 15px; margin: 12px 0;
-            border-radius: 8px; border: 1px solid var(--jinx-cyan);
-            background: rgba(4, 169, 235, 0.05); color: var(--jinx-cyan);
+            border-radius: 8px; border: 1px solid var(--jinx-pink);
+            background: rgba(4, 169, 235, 0.05); color: var(--jinx-pink);
             cursor: pointer; font-weight: bold; text-transform: uppercase;
             transition: all 0.25s ease-out; 
             display: block; text-decoration: none;
@@ -85,7 +82,7 @@
         }
 
         .btn:hover {
-            background: var(--jinx-cyan);
+            background: var(--jinx-pink);
             color: #000;
             box-shadow: 0 0 20px rgba(4, 169, 235, 0.4);
             transform: translateY(-2px);
@@ -93,13 +90,13 @@
 
 	/* Act 2: The Last Drop (Pink) */
         .btn-act2 { 
-            border-color: var(--jinx-pink); 
-            color: var(--jinx-pink); 
+            border-color: var(--jinx-cyan); 
+            color: var(--jinx-cyan); 
             background: rgba(255, 0, 234, 0.05); 
         }
         .btn-act2:hover { 
-            background: var(--jinx-pink); 
-            color: #fff; 
+            background: var(--jinx-cyan); 
+            color: #000; 
             box-shadow: 0 0 20px rgba(255, 0, 234, 0.4); 
         }
 

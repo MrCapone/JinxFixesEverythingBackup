@@ -8,11 +8,14 @@
     <link rel="icon" type="image/png" href="favicon.png">    
     <title>Jinx Fixes Everything</title>
     <style>
-        :root {
+	:root {
+            --jinx-main: #04A9EB;
             --jinx-cyan: #00f2ff;
-            --jinx-pink: #ff00ea;
+	    --jinx-pink: #ff00ea;
+            --firelight: #a6ff00;
             --jinx-dark: #0a0c10;
-            --jinx-border: #30363d;
+            --jinx-bg: #05070a;
+            --jinx-border: #1e2329;
         }
 
         body, html { 
@@ -20,59 +23,97 @@
             background: #000; overflow: hidden; font-family: 'Segoe UI', Roboto, sans-serif; 
         }
 
-        #menu {
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            width: 100%; height: 100%; position: absolute; z-index: 10;
-            background: linear-gradient(rgba(10, 12, 16, 0.8), rgba(10, 12, 16, 0.8)), 
-                        url('Jinx_Fixes_Everything_Promo_01.jpg') no-repeat center center;
-            background-size: cover;
+	#menu {
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center;
+            width: 100%; 
+            height: 100%; 
+            position: absolute; 
+            z-index: 10;
+            background: radial-gradient(circle at center, #0d1a25 0%, #05070a 100%);
         }
 
-        .launcher { 
-            background: rgba(22, 27, 34, 0.9); 
-            padding: 40px; 
-            border-radius: 20px; 
-            border: 2px solid var(--jinx-cyan); 
-            text-align: center; 
-            width: 380px;
-            box-shadow: 0 0 30px rgba(0, 242, 255, 0.2);
-            backdrop-filter: blur(10px);
+	.launcher {
+            background: rgba(13, 17, 23, 0.9);
+            padding: 40px;
+            border-radius: 20px;
+            border: 2px solid var(--jinx-main);
+            text-align: center;
+            width: 400px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(12px);
         }
 
-        h1 { 
-            color: #fff; 
-            text-transform: uppercase; 
-            margin-bottom: 25px; 
-            letter-spacing: 2px;
-            text-shadow: 2px 2px var(--jinx-pink);
+	.main-logo {
+            width: 100%;
+            height: auto;
+            margin-bottom: 25px;
+            border-radius: 8px;
+            filter: none;
         }
 
-        select { 
-            width: 100%; padding: 12px; margin: 10px 0; 
-            border-radius: 8px; border: 1px solid var(--jinx-border); 
+        select {
+            width: 100%; padding: 14px; margin: 10px 0;
+            border-radius: 8px; border: 1px solid var(--jinx-border);
             background: #0d1117; color: #fff; font-size: 16px;
             outline: none; transition: 0.3s;
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 1em;
         }
-        select:focus { border-color: var(--jinx-pink); }
 
-        .btn { 
-            width: 100%; padding: 14px; margin: 12px 0; 
-            border-radius: 8px; border: 1px solid var(--jinx-cyan); 
-            background: transparent; color: var(--jinx-cyan); 
+        select:focus { 
+            border-color: var(--jinx-main); 
+            box-shadow: 0 0 12px rgba(4, 169, 235, 0.3); 
+        }
+
+	/* Act 1: Arcade (Cyan) */
+	.btn {
+            width: 100%; padding: 15px; margin: 12px 0;
+            border-radius: 8px; border: 1px solid var(--jinx-cyan);
+            background: rgba(4, 169, 235, 0.05); color: var(--jinx-cyan);
             cursor: pointer; font-weight: bold; text-transform: uppercase;
-            transition: all 0.3s ease; display: block; text-decoration: none;
+            transition: all 0.25s ease-out; 
+            display: block; text-decoration: none;
             box-sizing: border-box;
+            letter-spacing: 1px;
         }
 
-        .btn:hover { 
-            background: var(--jinx-cyan); 
-            color: #000; 
-            box-shadow: 0 0 20px var(--jinx-cyan);
+        .btn:hover {
+            background: var(--jinx-cyan);
+            color: #000;
+            box-shadow: 0 0 20px rgba(4, 169, 235, 0.4);
             transform: translateY(-2px);
         }
 
-        .btn-alt { border-color: var(--jinx-pink); color: var(--jinx-pink); }
-        .btn-alt:hover { background: var(--jinx-pink); color: #fff; box-shadow: 0 0 20px var(--jinx-pink); }
+	/* Act 2: The Last Drop (Pink) */
+        .btn-act2 { 
+            border-color: var(--jinx-pink); 
+            color: var(--jinx-pink); 
+            background: rgba(255, 0, 234, 0.05); 
+        }
+        .btn-act2:hover { 
+            background: var(--jinx-pink); 
+            color: #fff; 
+            box-shadow: 0 0 20px rgba(255, 0, 234, 0.4); 
+        }
+
+        /* Act 3: Firelight (Green) */
+        .btn-act3 { 
+            border-color: var(--firelight); 
+            color: var(--firelight); 
+            background: rgba(166, 255, 0, 0.05); 
+        }
+        .btn-act3:hover { 
+            background: var(--firelight); 
+            color: #000; 
+            box-shadow: 0 0 20px rgba(166, 255, 0, 0.4); 
+        }
 
         #game-container { 
             display: none; 
@@ -84,6 +125,7 @@
             left: 0; 
             z-index: 100; 
         }
+
         iframe { 
             width: 100%; 
             height: 100%; 
@@ -95,8 +137,7 @@
 <body>
     <div id="menu">
         <div class="launcher">
-            <img src="logo.png" alt="Jinx Logo" style="width: 80px; height: auto; margin-bottom: 10px; filter: drop-shadow(0 0 10px var(--jinx-pink));">
-            <h1>Jinx Fixes Everything</h1>
+            <img src="logo.jpg" alt="Jinx Fixes Everything" class="main-logo">
             <select id="locale">
                 <option value="en-us">English (US)</option>
                 <option value="en-gb">English (UK)</option>
@@ -124,10 +165,10 @@
                 <option value="tr-tr">Türkçe (Turkey)</option>
                 <option value="ar-ae">العربية (UAE)</option>
             </select>
-            <div style="margin-top: 20px;">
+		<div style="margin-top: 20px;">
                 <div class="btn" onclick="launch('arcade.html')">Act 1: Arcade</div>
-                <div class="btn" onclick="launch('lastdrop.html')">Act 2: Last Drop</div>
-                <div class="btn" onclick="launch('firelight.html')">Act 3: Firelight</div>
+                <div class="btn btn-act2" onclick="launch('lastdrop.html')">Act 2: The Last Drop</div>
+                <div class="btn btn-act3" onclick="launch('firelight.html')">Act 3: Firelight</div>
             </div>
         </div>
     </div>
@@ -166,20 +207,20 @@
             const container = document.getElementById('game-container');
             const frame = document.getElementById('game-frame');
 
-	    frame.onload = () => {
-    	        try {
+            frame.onload = () => {
+                try {
                    const currentPath = frame.contentWindow.location.pathname;
-        
+
                    // If the iframe navigated to a locale path or root, close it
                    if (supportedLocales.some(loc => currentPath.includes(loc)) || currentPath === '/') {
                        exitGame();
                    }
                 } catch (e) {
-                    // If we hit a Cross-Origin error or a 404, it usually means 
+                    // If we hit a Cross-Origin error or a 404, it usually means
                     // the game tried to navigate away. Treat this as an "Exit".
                     exitGame();
                 }
-            };   
+            };
 
             const docElm = document.documentElement;
             if (docElm.requestFullscreen) {
@@ -197,11 +238,11 @@
             const menu = document.getElementById('menu');
             const container = document.getElementById('game-container');
             const frame = document.getElementById('game-frame');
-    
+
             container.style.display = 'none';
             menu.style.display = 'flex';
             frame.src = "about:blank"; // Kill the WebGL instance to free RAM
-    
+
             if (document.fullscreenElement) {
                 document.exitFullscreen();
             }
